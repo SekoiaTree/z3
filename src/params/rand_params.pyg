@@ -1,0 +1,6 @@
+def_module_params('rand',
+                  description='random sources parameters',
+                  export=True,
+                  params=(
+                    ('root', UINT, 1, 'the root seed that is used (directly or indirectly) to produce every other random number. Set to 0 to pick a random seed.'),
+                  ))

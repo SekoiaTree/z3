@@ -12,6 +12,7 @@ z3_add_component(cmd_context
     simplifier_cmds.cpp
     tactic_cmds.cpp
     tactic_manager.cpp
+    random_tree.cpp
   COMPONENT_DEPENDENCIES
     rewriter
     solver
