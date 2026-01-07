@@ -59,6 +59,7 @@ public:
 protected:
     using rand_param_accessor = unsigned (rand_params::*)() const;
     static constexpr std::pair<unsigned, rand_param_accessor> ID_TO_PARAM[] = {
+        {0b10000, &rand_params::hash_salt}, // hash_salt: 1st child of root.
     };
     static branch* root;
 

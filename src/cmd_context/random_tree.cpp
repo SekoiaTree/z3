@@ -39,7 +39,7 @@ random_tree::branch::branch(unsigned seed, unsigned num_children, unsigned id): 
         }
 
         if (accessor == nullptr) {
-            m_id = 0; // We don't have an accessor; nothing below us will either
+            if (id != 1) m_id = 0; // We don't have an accessor; nothing below us will either
         } else {
             const auto new_seed = (rand_params().*accessor)();
             if (new_seed != 0) {

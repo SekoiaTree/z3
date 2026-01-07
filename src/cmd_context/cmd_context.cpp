@@ -22,6 +22,7 @@ Notes:
 #include "util/scoped_ctrl_c.h"
 #include "util/dec_ref_util.h"
 #include "util/scoped_timer.h"
+#include "ast/ast.h"
 #include "ast/func_decl_dependencies.h"
 #include "ast/arith_decl_plugin.h"
 #include "ast/bv_decl_plugin.h"
@@ -51,6 +52,8 @@ Notes:
 #include "solver/smt_logics.h"
 #include "cmd_context/basic_cmds.h"
 #include "cmd_context/cmd_context.h"
+
+#include "random_tree.h"
 #include "solver/slice_solver.h"
 #include <iostream>
 
@@ -363,6 +366,9 @@ ast_manager * ast_context_params::mk_ast_manager() {
         r->enable_int_real_coercions(false);
     if (m_debug_ref_count)
         r->debug_ref_count();
+
+    // Lock in the hash salt now.
+    ast::hash_salt = random_tree::get_root()[random_tree::HASH_SALT_IDX];
     return r;
 }
 

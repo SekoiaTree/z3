@@ -2,5 +2,6 @@ def_module_params('rand',
                   description='random sources parameters',
                   export=True,
                   params=(
-                    ('root', UINT, 1, 'the root seed that is used (directly or indirectly) to produce every other random number. Set to 0 to pick a random seed.'),
+                    ('root', UINT, 1, 'the root seed that is used (directly or indirectly) to produce every other random number. Set to 0 to pick a random seed from the OS (will change every run).'),
+                    ('hash_salt', UINT, 0, 'a salt used for hashing AST nodes, which may change the order of some operations. Generally, you should not need to change this; set the root seed instead. Set to 0 to pick a random salt. Parent seed: root.')
                   ))

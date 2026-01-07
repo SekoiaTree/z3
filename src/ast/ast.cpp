@@ -513,7 +513,7 @@ inline unsigned ast_array_hash(T * const * array, unsigned size, unsigned init_v
     } }
 }
 
-unsigned get_node_hash(ast const * n) {
+unsigned get_node_hash_raw(ast const * n) {
     unsigned a, b, c;
 
     switch (n->get_kind()) {
@@ -545,6 +545,11 @@ unsigned get_node_hash(ast const * n) {
         UNREACHABLE();
     }
     return 0;
+}
+
+unsigned ast::hash_salt = 0;
+unsigned get_node_hash(ast const * n) {
+    return combine_hash(get_node_hash_raw(n), ast::hash_salt);
 }
 
 void ast_table::push_erase(ast * n) {

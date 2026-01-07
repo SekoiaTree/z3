@@ -504,6 +504,8 @@ protected:
         });
     }
 public:
+    static unsigned hash_salt;
+
     unsigned get_id() const { return m_id; }
     unsigned get_ref_count() const { return m_ref_count; }
     ast_kind get_kind() const { return static_cast<ast_kind>(m_kind); }
