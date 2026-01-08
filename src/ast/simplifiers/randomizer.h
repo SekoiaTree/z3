@@ -21,6 +21,7 @@ Author:
 #include "ast/ast.h"
 #include "ast/ast_pp.h"
 #include "ast/simplifiers/dependent_expr_state.h"
+#include "cmd_context/random_tree.h"
 #include "util/obj_hashtable.h"
 #include "params/tactic_params.hpp"
 #include <algorithm>
@@ -116,8 +117,7 @@ class randomizer_simplifier : public dependent_expr_simplifier {
 public:
     randomizer_simplifier(ast_manager& m, params_ref const & p, dependent_expr_state& fmls)
         : dependent_expr_simplifier(m, fmls), m(m), m_ast_trail(m), m_new_exprs(m) {
-        tactic_params tp(p);
-        m_rand.set_seed(tp.randomizer_seed()); // set random seed from parameter
+        m_rand.set_seed(0);//random_tree::get_tactic_randomizer_seed()); // set random seed from parameter
         }
 
     char const* name() const override { return "randomizer"; }

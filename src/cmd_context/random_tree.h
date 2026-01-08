@@ -60,11 +60,16 @@ protected:
     using rand_param_accessor = unsigned (rand_params::*)() const;
     static constexpr std::pair<unsigned, rand_param_accessor> ID_TO_PARAM[] = {
         {0b10000, &rand_params::hash_salt}, // hash_salt: 1st child of root.
+        {0b10001, &rand_params::tactic_randomizer_seed}, // randomizer tactic seed: 2nd child of root
     };
     static branch* root;
 
 public:
-    static constexpr unsigned HASH_SALT_IDX = 0;
+#define GET_ROOT_PARAM(name, idx) static unsigned get_##name() { return get_root()[idx]; }
+
+    GET_ROOT_PARAM(hash_salt, 0);
+    GET_ROOT_PARAM(tactic_randomizer_seed, 1);
+
     static constexpr unsigned ROOT_CHILDREN = 2;
     static bool init_root(unsigned seed);
     static branch& get_root();

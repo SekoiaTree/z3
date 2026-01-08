@@ -368,7 +368,7 @@ ast_manager * ast_context_params::mk_ast_manager() {
         r->debug_ref_count();
 
     // Lock in the hash salt now.
-    ast::hash_salt = random_tree::get_root()[random_tree::HASH_SALT_IDX];
+    ast::hash_salt = random_tree::get_hash_salt();
     return r;
 }
 

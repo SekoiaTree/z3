@@ -621,7 +621,7 @@ namespace sls {
         while (!m_updates.empty()) {
 
             unsigned i = m_updates.size();
-            double lim = sum_score * ((double)ctx.rand() / random_gen().max_value());
+            double lim = sum_score * ((double)ctx.rand() / random_gen::max_value());
             do {
                 lim -= m_updates[--i].m_score;
             } while (lim >= 0 && i > 0);
