@@ -359,6 +359,9 @@ void macro_decls::erase_last(ast_manager& m) {
 ast_manager * ast_context_params::mk_ast_manager() {
     if (m_manager)
         return m_manager;
+
+    // Lock in the hash salt now.
+    ast::hash_salt = random_tree::get_hash_salt();
     ast_manager * r = alloc(ast_manager,
                             m_proof ? PGM_ENABLED : PGM_DISABLED,
                             m_trace ? m_trace_file_name.c_str() : nullptr);
@@ -367,8 +370,6 @@ ast_manager * ast_context_params::mk_ast_manager() {
     if (m_debug_ref_count)
         r->debug_ref_count();
 
-    // Lock in the hash salt now.
-    ast::hash_salt = random_tree::get_hash_salt();
     return r;
 }
 
